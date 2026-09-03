@@ -19,7 +19,7 @@ Windows 桌面系统监控悬浮窗：透明置顶、托盘常驻，实时显示
 
 ### 直接使用
 
-下载 `sys_monitor_tauri.exe`，放到任意目录双击运行即可，无需安装，配置与运行数据写在用户目录下。
+从 [Releases](../../releases) 下载 `sys_monitor_tauri.exe`，放到任意目录双击运行即可，无需安装，配置与运行数据写在用户目录下。
 
 ### 从源码构建
 
@@ -115,7 +115,6 @@ sys_monitor_tauri/
 │       ├── monitor.rs    # 采集主循环 + GPU 独立线程缓存
 │       ├── gpu.rs        # GPU 采集（DXGI 枚举 + PDH 计数器）
 │       └── settings.rs   # 设置结构体与 JSON 持久化
-├── docs/                 # 开发经验笔记
 └── dist/                 # 前端构建产物
 ```
 
@@ -127,7 +126,3 @@ sys_monitor_tauri/
 | 桌面框架 | Tauri 2 |
 | 后端 | Rust（sysinfo + DXGI / PDH 采集） |
 | 托盘 / 全局快捷键 | Tauri tray API / tauri-plugin-global-shortcut |
-
-## 其他
-
-开发过程中的实现取舍与调试记录见 [docs/development-notes.md](docs/development-notes.md)。
