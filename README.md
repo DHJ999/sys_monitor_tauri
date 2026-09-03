@@ -1,5 +1,7 @@
 # 系统监控悬浮窗 (sys_monitor_tauri)
 
+> English documentation: [README_EN.md](README_EN.md)
+
 Windows 桌面系统监控悬浮窗：透明置顶、托盘常驻，实时显示 CPU、内存、GPU、磁盘、网络与进程占用，支持多套显示风格预设与分模块自定义。
 
 ## 功能
