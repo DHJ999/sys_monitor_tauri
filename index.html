@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>系统监控</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <!-- 标题栏：整条作为拖动区（mousedown 触发 startDragging，避开按钮） -->
+    <div class="titlebar">
+      <div class="titlebar-left">
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-13h2v6h-2zm0 8h2v2h-2z" opacity="0.9"/>
+        </svg>
+        <span class="titlebar-title">系统监控</span>
+      </div>
+      <div class="titlebar-actions">
+              <button id="btn-procs" class="tb-btn" title="进程列表">
+          <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M3 5h18v2H3V5zm0 6h18v2H3v-2zm0 6h12v2H3v-2z"/></svg>
+        </button>
+        <button id="btn-settings" class="tb-btn" title="设置">
+          <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.5-2-3.5-2.4 1a7.6 7.6 0 0 0-1.7-1l-.3-2.5h-4L10.6 6a7.6 7.6 0 0 0-1.7 1l-2.4-1-2 3.5L6.5 11a7.6 7.6 0 0 0 0 2l-2 1.5 2 3.5 2.4-1a7.6 7.6 0 0 0 1.7 1l.3 2.5h4l.3-2.5a7.6 7.6 0 0 0 1.7-1l2.4 1 2-3.5-2-1.5zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg>
+        </button>
+        <button id="btn-close" class="tb-btn tb-close" title="关闭">
+          <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 主内容：模块卡片由 JS 按当前风格动态渲染 -->
+    <div class="content">
+      <div id="modules"></div>
+      <div id="proc-wrap" class="procs hidden"></div>
+    </div>
+
+    <!-- 设置面板：独立设置窗口内显示（标题栏用系统原生的，不再自画头部） -->
+    <div id="settings-panel" class="settings-panel hidden">
+      <div class="settings-body">
+        <label class="row"><span>始终置顶</span><input type="checkbox" id="set-alwaystop" /></label>
+        <label class="row"><span>开机自启动</span><input type="checkbox" id="set-autostart" /></label>
+        <label class="row">
+          <span>关闭行为</span>
+          <select id="set-closeaction">
+            <option value="toTray">最小化到托盘</option>
+            <option value="exit">直接退出</option>
+          </select>
+        </label>
+        <label class="row">
+          <span>桌面位置</span>
+          <select id="set-desktopmode">
+            <option value="floating">悬浮（自由拖动）</option>
+            <option value="topRight">固定右上角</option>
+            <option value="topLeft">固定左上角</option>
+          </select>
+        </label>
+        <label class="row">
+          <span>文字颜色</span>
+          <div class="color-row">
+            <button class="color-dot" data-color="#FFFFFF" style="background:#FFFFFF"></button>
+            <button class="color-dot" data-color="#4C8DF5" style="background:#4C8DF5"></button>
+            <button class="color-dot" data-color="#10B981" style="background:#10B981"></button>
+            <button class="color-dot" data-color="#F59E0B" style="background:#F59E0B"></button>
+            <button class="color-dot" data-color="#F87171" style="background:#F87171"></button>
+            <button class="color-dot" data-color="#E879F9" style="background:#E879F9"></button>
+            <button class="color-dot" data-color="#38BDF8" style="background:#38BDF8"></button>
+          </div>
+        </label>
+        <label class="row"><span>窗口透明度 <b id="opacity-val">100%</b></span><input type="range" id="set-opacity" min="20" max="100" step="5" /></label>
+        <label class="row"><span>字号 <b id="font-size-val">12</b></span><input type="range" id="set-fontsize" min="10" max="18" step="1" /></label>
+
+        <div class="settings-divider"></div>
+
+        <div class="row-col">
+          <span class="row-label">显示风格</span>
+          <div class="preset-row">
+            <button class="preset-btn" data-preset="default">默认</button>
+            <button class="preset-btn" data-preset="curve">曲线</button>
+            <button class="preset-btn" data-preset="minimal">极简</button>
+            <button class="preset-btn" data-preset="cards">双列</button>
+          </div>
+        </div>
+        <label class="row"><span>CPU</span>
+          <select id="set-cpu-display">
+            <option value="ring">圆环+曲线</option>
+            <option value="spark">迷你曲线</option>
+            <option value="bar">进度条</option>
+            <option value="text">纯文字</option>
+          </select>
+        </label>
+        <label class="row"><span>内存</span>
+          <select id="set-mem-display">
+            <option value="bar">进度条</option>
+            <option value="spark">迷你曲线</option>
+            <option value="text">纯文字</option>
+          </select>
+        </label>
+        <label class="row"><span>GPU</span>
+          <select id="set-gpu-display">
+            <option value="bar">进度条</option>
+            <option value="spark">迷你曲线</option>
+            <option value="text">纯文字</option>
+          </select>
+        </label>
+        <label class="row"><span>磁盘</span>
+          <select id="set-disk-display">
+            <option value="bar">进度条</option>
+            <option value="spark">迷你曲线</option>
+            <option value="text">纯文字</option>
+          </select>
+        </label>
+        <label class="row"><span>网络</span>
+          <select id="set-net-display">
+            <option value="stats">默认卡片</option>
+            <option value="text">纯文字</option>
+            <option value="spark">迷你曲线</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <!-- 右下角缩放手柄（无边框窗口的边缘热区太小，给一个明确的拖拽点） -->
+    <div id="resize-grip" class="resize-grip" title="拖动调整大小"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
