@@ -1,23 +1,23 @@
-# System Monitor Overlay (sys_monitor_tauri)
+# 🖥️ System Monitor Overlay (sys_monitor_tauri)
 
 A lightweight, always-on-top **desktop system monitor** for Windows. It floats on your desktop as a transparent overlay and shows real-time CPU, memory, GPU, disk, network, and process usage at a glance. Built with [Tauri 2](https://v2.tauri.app/) (Rust backend) and a TypeScript + Vite frontend.
 
-> Windows 10 / 11 only. Single-file executable, no installation required.
+> 📌 Windows 10 / 11 only. Single-file executable, no installation required.
 
-## Features
+## ✨ Features
 
-- **CPU** — usage ring chart + live sparkline
-- **Memory** — usage progress bar with used / total (GB)
-- **GPU** — one row per graphics card showing model, utilization, and VRAM usage (DXGI + PDH)
-- **Disk** — usage + live read / write throughput (MB/s)
-- **Network** — live download / upload speed (KB/s)
-- **Processes** — top 8 by memory consumption
-- **Display styles** — 4 presets plus per-module customization
-- **System tray** — show / hide, pin / unpin, open settings, quit
-- **Global hotkey** — `Ctrl + Alt + M` toggles visibility
-- **Transparent window** — overall opacity 20%–100% (CSS `opacity`)
+- ⚡ **CPU** — usage ring chart + live sparkline
+- 💾 **Memory** — usage progress bar with used / total (GB)
+- 🎮 **GPU** — one row per graphics card showing model, utilization, and VRAM usage (DXGI + PDH)
+- 💽 **Disk** — usage + live read / write throughput (MB/s)
+- 🌐 **Network** — live download / upload speed (KB/s)
+- ⚙️ **Processes** — top 8 by memory consumption
+- 🎨 **Display styles** — 4 presets plus per-module customization
+- 📌 **System tray** — show / hide, pin / unpin, open settings, quit
+- ⌨️ **Global hotkey** — `Ctrl + Alt + M` toggles visibility
+- 👻 **Transparent window** — overall opacity 20%–100% (CSS `opacity`)
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -26,19 +26,19 @@ A lightweight, always-on-top **desktop system monitor** for Windows. It floats o
 | Backend | Rust (`sysinfo` + DXGI / PDH sampling) |
 | Tray / global hotkey | Tauri tray API / `tauri-plugin-global-shortcut` |
 
-## Installation
+## 📦 Installation
 
-### Option A — Download the prebuilt binary (recommended)
+### 🥇 Option A — Download the prebuilt binary (recommended)
 
 Grab `sys_monitor_tauri.exe` from the [**Releases**](../../releases) page, drop it into any folder, and double-click to run. No installation, no dependencies beyond what Windows already provides (WebView2 ships with Windows 10/11).
 
-### Option B — Build from source
+### 🧱 Option B — Build from source
 
 **Prerequisites**
 
-- Rust (stable, with the MSVC toolchain)
-- Node.js 18 or newer
-- WebView2 (preinstalled on Windows 10/11)
+- 🦀 Rust (stable, with the MSVC toolchain)
+- 🟢 Node.js 18 or newer
+- 🌐 WebView2 (preinstalled on Windows 10/11)
 
 **Steps**
 
@@ -61,29 +61,29 @@ npx tauri build
 
 | Output | Path |
 |---|---|
-| Executable | `src-tauri/target/release/sys_monitor_tauri.exe` |
-| Installer | `src-tauri/target/release/bundle/` |
+| 🚀 Executable | `src-tauri/target/release/sys_monitor_tauri.exe` |
+| 📦 Installer | `src-tauri/target/release/bundle/` |
 
-> The full installer needs the WiX toolset, which Tauri downloads automatically on first build.
+> ⚠️ The full installer needs the WiX toolset, which Tauri downloads automatically on first build.
 
-## Usage
+## 🖱️ Usage
 
-### Window
+### 🪟 Window
 
 - The main window defaults to 320×480 and can be resized between 280×360 and 600×900.
 - It is borderless and transparent. Drag by the title bar; resize from the bottom-right handle.
 - **Desktop position** can be set to *free floating*, *top-right*, or *top-left*.
 
-### Keyboard & tray
+### ⌨️ Keyboard & tray
 
 - `Ctrl + Alt + M` — show / hide the main window.
 - Right-click the tray icon for: show / hide, pin / unpin, open settings, quit.
 
-### Settings
+### 🎛️ Settings
 
 Open **Settings** from the tray menu. Changes apply instantly and persist — no restart needed.
 
-## Configuration
+## ⚙️ Configuration
 
 All options are available from the in-app Settings window. They are stored in:
 
@@ -93,31 +93,31 @@ All options are available from the in-app Settings window. They are stored in:
 
 | Option | Description |
 |---|---|
-| Always on top | Keep the window above other windows |
-| Auto start | Launch on system login |
-| Close behavior | Minimize to tray / Quit |
-| Desktop position | Free floating / Top-right / Top-left |
-| Text color | 7 presets |
-| Opacity | 20% – 100% |
-| Font size | 10 – 18 |
-| Display style | 4 presets + per-module dropdowns (5 modules) |
+| 📌 Always on top | Keep the window above other windows |
+| 🚀 Auto start | Launch on system login |
+| 🚪 Close behavior | Minimize to tray / Quit |
+| 🗺️ Desktop position | Free floating / Top-right / Top-left |
+| 🎨 Text color | 7 presets |
+| 👻 Opacity | 20% – 100% |
+| 🔠 Font size | 10 – 18 |
+| 🎭 Display style | 4 presets + per-module dropdowns (5 modules) |
 
 Fields carry `serde` defaults, so an older `settings.json` remains forward-compatible.
 
-### Display styles
+### 🎭 Display styles
 
 **Settings → Display style** offers four one-click presets:
 
 | Preset | Layout | Notes |
 |---|---|---|
-| Default | Single column | CPU ring + line, memory/GPU/disk bars, dual network cards |
-| Sparkline | Single column | Mini line charts for every module |
-| Minimal | Single column | One line per module ("name + value"), smallest footprint |
-| Double | Two columns | Shorter window, ideal for the screen edge |
+| 🌱 Default | Single column | CPU ring + line, memory/GPU/disk bars, dual network cards |
+| 📈 Sparkline | Single column | Mini line charts for every module |
+| ✂️ Minimal | Single column | One line per module ("name + value"), smallest footprint |
+| 🔲 Double | Two columns | Shorter window, ideal for the screen edge |
 
 **Per-module customization:** each module has its own dropdown (CPU: ring / sparkline / bar / text; memory, GPU, disk: bar / sparkline / text; network: card / text / sparkline). Changing any dropdown switches to *custom* mode; clicking a preset reapplies the whole set.
 
-### Example `settings.json`
+### 📄 Example `settings.json`
 
 ```json
 {
@@ -138,7 +138,7 @@ Fields carry `serde` defaults, so an older `settings.json` remains forward-compa
 }
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 sys_monitor_tauri/
@@ -159,18 +159,18 @@ sys_monitor_tauri/
 └── dist/                 # Frontend build output
 ```
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome!
 
-1. Fork the repository and create a feature branch.
-2. Install the prerequisites listed under **Build from source**.
-3. Run `npx tauri dev` to iterate with hot-reload.
-4. Keep the Rust side formatted (`cargo fmt`) and free of `cargo clippy` warnings where reasonable.
-5. Submit a pull request describing the change and the motivation.
+1. 🍴 Fork the repository and create a feature branch.
+2. 📦 Install the prerequisites listed under **Build from source**.
+3. 🚀 Run `npx tauri dev` to iterate with hot-reload.
+4. 🧹 Keep the Rust side formatted (`cargo fmt`) and free of `cargo clippy` warnings where reasonable.
+5. 📮 Submit a pull request describing the change and the motivation.
 
 Please open an issue first for larger changes so we can align on the approach.
 
-## License
+## 📄 License
 
 Licensed under the [MIT License](LICENSE).
