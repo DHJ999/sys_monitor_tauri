@@ -171,6 +171,16 @@ Contributions are welcome!
 
 Please open an issue first for larger changes so we can align on the approach.
 
+> 📌 **Note on contributions:** this repository is proprietary. By submitting a contribution you agree that the author may use, modify, and incorporate it under the terms of the [LICENSE](LICENSE) — not as an open-source release.
+
 ## 📄 License
 
-Licensed under the [MIT License](LICENSE).
+This project is licensed under the **PolyForm Noncommercial License 1.0.0** (source-available, not open source).
+
+🆓 **Free** — personal and noncommercial purposes (research, study, experimentation, hobby projects, and similar) may use, modify, and redistribute freely.
+
+💼 **Commercial use** — including corporate/production deployment, embedding or redistributing in products or services you sell, or offering paid hosted/outsourced/subscription services based on this software — is **outside the license grant** and requires a **separate commercial license from the author before use**. Open an [issue](../../issues/new) describing your use case and deployment size; the author will reply privately with terms and pricing.
+
+> Versions v1.0.0 and earlier of this repository were released under the MIT License (MIT is irrevocable). Releases made under this license file are governed by the terms above.
+
+See [LICENSE](LICENSE) for the full terms.
